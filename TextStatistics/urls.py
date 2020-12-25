@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from appTextStats.views import perform_stats
+from appTextStats.views import perform_stats,perform_removeChar,perform_specialChar
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('textstats/',perform_stats),
+    path('removechar/',perform_removeChar),
+    path('specialchar/',perform_specialChar),
 ]
