@@ -5,6 +5,8 @@ import json
 import os
 from TextStatistics.settings import FILE_DIR
 from appTextStats.parser.wordCount import TextParser
+from appTextStats.parser.specialChar import SpecialCharParser
+from appTextStats.parser.removeChar import RemoveCharParser
 
 # Create your views here.
 @csrf_exempt
@@ -46,6 +48,51 @@ def perform_stats(request):
     return JsonResponse(data={'status' : 200})
 
 
+@csrf_exempt
+def perform_removeChar(request):
+    print(request)
+    textDict = {}
+    params = json.loads(request.body)
+    document = params['file_name']
+    remove_char = params['remove_char']
+    print(document)
+    id = params['id']
+    id = str(id)
+    
+    uploaded_path = os.path.join(FILE_DIR,'user_'+id +'/rawData/' + document)
+    try:
+        os.mkdir(FILE_DIR+'/user_'+id +'/removeCharData/')
+    except Exception as err:
+        print('Mkdir Error : {0}'.format(err))
+
+    removeChar_path = os.path.join(FILE_DIR,'user_'+id +'/removeCharData/' + document)
+    print(uploaded_path)
+    parserop = RemoveCharParser()
+    textDict = parserop.parse(uploaded_path,remove_char)
+
+    wf = open(removeChar_path,'w')
+    
+    print(textDict['removeChar'],file=wf)
+
+    wf.close
+
+    return JsonResponse(data={'status' : 200})
+
+
+@csrf_exempt
+def perform_specialChar(request):
+    params = json.loads(request.body)
+    document = params['file_name']
+    id = params['id']
+    id = str(id)
+    
+    uploaded_path = os.path.join(FILE_DIR,'user_'+id +'/rawData/' + document)
+    #print(uploaded_path)
+    parserop = SpecialCharParser()
+
+    specialChar = parserop.parse(uploaded_path)
+    #print(specialChar)
+    return JsonResponse(data=specialChar)
 
 
 
