@@ -72,7 +72,7 @@ def perform_removeChar(request):
 
     wf = open(removeChar_path,'w')
     
-    #print(textDict['removeChar'],file=wf)
+    print(textDict['removeChar'],file=wf)
 
     wf.close
 
