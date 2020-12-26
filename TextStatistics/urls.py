@@ -19,5 +19,5 @@ from django.conf.urls import url,include
 
 
 urlpatterns = [
-    url(r'^tools/',include('appTextStats.urls',namespace='appTextStats')),
+    url(r'^texttools/',include('appTextStats.urls',namespace='appTextStats')),
 ]
