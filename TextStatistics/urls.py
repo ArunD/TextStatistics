@@ -15,11 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from appTextStats.views import perform_stats,perform_removeChar,perform_specialChar
+from django.conf.urls import url,include
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('textstats/',perform_stats),
-    path('removechar/',perform_removeChar),
-    path('specialchar/',perform_specialChar),
+    url(r'^tools/',include('appTextStats.urls',namespace='appTextStats')),
 ]
