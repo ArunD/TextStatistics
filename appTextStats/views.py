@@ -66,13 +66,13 @@ def perform_removeChar(request):
         print('Mkdir Error : {0}'.format(err))
 
     removeChar_path = os.path.join(FILE_DIR,'user_'+id +'/removeCharData/' + document)
-    print(uploaded_path)
+    #print(uploaded_path)
     parserop = RemoveCharParser()
     textDict = parserop.parse(uploaded_path,remove_char)
 
     wf = open(removeChar_path,'w')
     
-    print(textDict['removeChar'],file=wf)
+    #print(textDict['removeChar'],file=wf)
 
     wf.close
 
